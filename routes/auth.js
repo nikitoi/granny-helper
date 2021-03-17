@@ -59,17 +59,32 @@ router
   .get((req, res) => res.render('signup', { isSignup: true }))
   // Регистрация пользователя
   .post(async (req, res) => {
-    const { username, password, status } = req.body;
+    const { username, password, status, granny } = req.body;
     try {
       // Мы не храним пароль в БД, только его хэш
       const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
       const hashedPassword = await bcrypt.hash(password, saltRounds);
-      const user = await User.create({
-        username,
-        password: hashedPassword,
-        status,
-      });
-      req.session.user = serializeUser(user);
+      // Проверяем, есть ли бабушка с указанным логином
+      const grannyObj = await User.findOne({ username: granny });
+      if (status === 'Внук' && !grannyObj) {
+        return failAuth(res);
+      }
+      if (status === 'Внук' && grannyObj) {
+        const user = await User.create({
+          username,
+          password: hashedPassword,
+          status,
+          granny: grannyObj,
+        });
+        req.session.user = serializeUser(user);
+      } else if (status === 'Бабушка') {
+        const user = await User.create({
+          username,
+          password: hashedPassword,
+          status,
+        });
+        req.session.user = serializeUser(user);
+      }
     } catch (err) {
       logger.error(err);
       return failAuth(res);

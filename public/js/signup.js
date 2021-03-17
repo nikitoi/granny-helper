@@ -21,6 +21,7 @@ document.forms.signupForm?.addEventListener('submit', async (event) => {
         username: event.target.username.value,
         password: event.target.password.value,
         status: event.target.status.value,
+        granny: event.target.granny.value,
       }),
     });
   } catch (err) {

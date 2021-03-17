@@ -20,6 +20,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // Granny
+  granny: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'User',
+  },
 });
 
 export default mongoose.model('User', UserSchema);
