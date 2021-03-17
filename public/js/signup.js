@@ -19,8 +19,8 @@ document.forms.signupForm?.addEventListener('submit', async (event) => {
       },
       body: JSON.stringify({
         username: event.target.username.value,
-        email: event.target.email.value,
         password: event.target.password.value,
+        status: event.target.status.value,
       }),
     });
   } catch (err) {

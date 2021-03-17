@@ -15,12 +15,10 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 8,
   },
-  // Email
-  email: {
+  // Status
+  status: {
     type: String,
     required: true,
-    minlength: 3,
-    match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
   },
 });
 

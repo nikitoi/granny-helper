@@ -59,7 +59,7 @@ router
   .get((req, res) => res.render('signup', { isSignup: true }))
   // Регистрация пользователя
   .post(async (req, res) => {
-    const { username, password, email } = req.body;
+    const { username, password, status } = req.body;
     try {
       // Мы не храним пароль в БД, только его хэш
       const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
@@ -67,7 +67,7 @@ router
       const user = await User.create({
         username,
         password: hashedPassword,
-        email,
+        status,
       });
       req.session.user = serializeUser(user);
     } catch (err) {
