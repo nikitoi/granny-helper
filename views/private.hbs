@@ -1,1 +1,10 @@
-Эта страница доступна только тебе, {{username}}!
+<h1>Привет, {{username}}!</h1>
+<form id="addImgForm" enctype="multipart/form-data" method="post" action="/private/photo">
+  <p>Сначала выберите картинку, затем нажмите Добавить изображение</p>
+  <p><input type="file" name="photo" multiple accept="image/*,image/jpeg">
+  <input type="submit" value="Добавить изображение"></p>
+</form>
+<div class="photo_gallery">
+
+</div>
+<script defer src="/js/private.js"></script>

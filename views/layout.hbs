@@ -21,22 +21,25 @@
 
 <body>
   <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link" href="/">Главная</a>
-    </li>
     {{#if username}}
     <li class="nav-item">
-      <a class="nav-link" href="/private">Конфиденциальная информация</a>
+      <a class="nav-link" href="/private/details">Инструкция</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/private">Личный кабинет</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/signout">Выйти</a>
     </li>
     {{else}}
     <li class="nav-item">
+      <a class="nav-link" href="/">Главная</a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="/signin">Войти</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/signup">Зарегистрироваться</a>
+      <a class="nav-link" href="/signup">Регистрация</a>
     </li>
     {{/if}}
   </ul>

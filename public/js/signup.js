@@ -3,7 +3,7 @@
  * @param {HTMLFormElement} signupForm Форма регистрации
  */
 function failSignup(signupForm) {
-  signupForm.username.setCustomValidity('Вероятно, что вы уже зарегистрированы.');
+  signupForm.username.setCustomValidity('Такой пользователь уже существует или логин бабушки указан неверно');
   signupForm.username.reportValidity();
 }
 
