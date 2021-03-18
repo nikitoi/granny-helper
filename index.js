@@ -22,6 +22,7 @@ app.set('trust proxy', 1);
 
 app.use(express.static('public'));
 app.use(express.json());
+// app.use(express.urlencoded({extended: true, limit: '50mb'}));
 app.use(session({
   name: app.get('session cookie name'),
   secret: process.env.SESSION_SECRET,

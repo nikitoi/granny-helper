@@ -9,6 +9,10 @@ const ImageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-}, { timestamps: true });
+  path: {
+    type: String,
+    required: true,
+  },
+});
 
 export default mongoose.model('Image', ImageSchema);

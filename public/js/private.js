@@ -1,23 +1,28 @@
-document.forms.addImgForm?.addEventListener('submit', async e => {
-  e.preventDefault();
-  const { method, photo, action } = e.target;
-  console.log(method, photo, action);
-  const response = await fetch(action, {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      image: photo,
-    }),
-  });
+const form = document.querySelector('#addImgForm');
+// const formData = new FormData(form);
 
-  const newPhoto = await response.json();
-  console.log('2222222', newPhoto);
+form.addEventListener('submit', async (e) => {
+  // e.preventDefault();
+  // const { method, photo, action, file } = e.target;
+  // console.log(method, photo, action, file.files[0]);
+  // const formData = await new FormData(e.target);
+  // const response = await fetch(action, {
+  //   method,
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   // body: JSON.stringify({
+  //   //   image: photo,
+  //   // }),
+  //   body: formData,
+  // });
 
-  window.location.assign('/private');
-  const gallery = document.querySelector('.photo_gallery');
-  gallery.innerHTML += `<img src="${newPhoto.path}">`;
+  // const newPhoto = await response.json();
+  // console.log('2222222', formData);
+
+  // window.location.assign('/private');
+  // const gallery = document.querySelector('.photo_gallery');
+  // gallery.innerHTML += `<img src="${formData.path}">`;
 
   // const photos = document.querySelector('.photo_gallery');
   // photos.innerHTML +=

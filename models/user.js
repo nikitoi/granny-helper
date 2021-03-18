@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'User',
   },
+  pics: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Image',
+  }],
 });
 
 export default mongoose.model('User', UserSchema);

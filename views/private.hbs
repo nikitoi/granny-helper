@@ -1,10 +1,13 @@
 <h1>Привет, {{username}}!</h1>
-<form id="addImgForm" enctype="multipart/form-data" method="post" action="/private/photo">
+<form id="addImgForm" enctype="multipart/form-data" method="post" action="/private">
   <p>Сначала выберите картинку, затем нажмите Добавить изображение</p>
-  <p><input type="file" name="photo" multiple accept="image/*,image/jpeg">
+  <p><input id="file" class="file" type="file" name="photo" multiple accept="image/*,image/jpeg">
   <input type="submit" value="Добавить изображение"></p>
 </form>
 <div class="photo_gallery">
-
+  {{#each userPics}}
+  <img src="{{this.path}}" width="200px">
+  <p>{{this.originalname}}</p>
+  {{/each}}
 </div>
 <script defer src="/js/private.js"></script>
