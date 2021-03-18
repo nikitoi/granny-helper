@@ -4,10 +4,42 @@
   <p><input id="file" class="file" type="file" name="photo" multiple accept="image/*,image/jpeg">
   <input type="submit" value="Добавить изображение"></p>
 </form>
+<div class="read-photo">
+
+</div>
+<div class="read-text">
+
+</div>
 <div class="photo_gallery">
   {{#each userPics}}
-  <img src="{{this.path}}" width="200px">
-  <p>{{this.originalname}}</p>
+  <div class="pic_box">
+    <a href="private/{{this.id}}" class="pic__link"><img title="{{this.path}}" src="{{this.path}}" class="img" width="100%"></a>
+    <p>{{this.originalname}}</p>
+  </div>
   {{/each}}
 </div>
 <script defer src="/js/private.js"></script>
+<style>
+  .pic_box {
+    width: 200px;
+    margin: 10px;
+    height: 200px;
+  }
+
+  .photo_gallery {
+    display: flex;
+  }
+
+  .read-photo {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    align-items: center;
+    margin: 30px auto;
+  }
+
+  .read-text {
+    width: 500px;
+    margin: 30px auto;
+  }
+</style>

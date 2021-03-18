@@ -1,10 +1,23 @@
 import express from 'express';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import fs from 'fs';
 import multer from 'multer';
 import authMiddleware from '../middlewares/auth.js';
 import Image from '../models/image.js';
 import User from '../models/user.js';
+
+// import Tesseract from 'tesseract.js';
+
+import { createWorker } from 'tesseract.js';
+
+const worker = createWorker({
+  logger: (data) => console.log(data)
+});
 
 const upload = multer({
   dest: 'public/uploads/',
@@ -42,6 +55,31 @@ router.post('/', upload.single('photo'), async (req, res, next) => {
   await user.save();
   res.redirect('/private');
 });
+
+router.post('/:id', async (req, res, next) => {
+  const picId = req.params.id;
+  const { lng } = req.body;
+  const dirr = __dirname.slice(0, -6);
+  const url = (dirr + `public/uploads/${picId}`).slice(0, -1);
+  const img = fs.readFileSync(url, {
+    encoding: null
+  });
+
+  async function recognize() {
+    const file = img;
+    const lang = lng;
+    await worker.load();
+    await worker.loadLanguage(lang);
+    await worker.initialize(lang);
+    const { data: { text } } = await worker.recognize(file);
+    console.log(text);
+    await worker.terminate();
+    return text;
+  }
+
+  res.json(await recognize());
+});
+
 
 router.get('/details', authMiddleware, (req, res) => res.render('details'));
 

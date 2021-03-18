@@ -1,29 +1,37 @@
-const form = document.querySelector('#addImgForm');
+const picLinks = document.querySelectorAll('.pic__link');
+const readPhoto = document.querySelector('.read-photo');
+const readText = document.querySelector('.read-text');
 // const formData = new FormData(form);
 
-form.addEventListener('submit', async (e) => {
-  // e.preventDefault();
-  // const { method, photo, action, file } = e.target;
-  // console.log(method, photo, action, file.files[0]);
-  // const formData = await new FormData(e.target);
-  // const response = await fetch(action, {
-  //   method,
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   // body: JSON.stringify({
-  //   //   image: photo,
-  //   // }),
-  //   body: formData,
-  // });
+picLinks.forEach((el) => {
+  el.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const img = el.querySelector('.img');
+    readPhoto.innerHTML = `<img src="${img.src}" id="file" width="300px">
+    <select id="langs">
+      <option value="rus" selected>Русский</option>
+      <option value="eng">English</option>
+    </select>
+    <div id="log"></div>
+    <button type="button" id="start">Начать обработку</button>`;
+    const url = JSON.stringify(img.title).slice(10);
 
-  // const newPhoto = await response.json();
-  // console.log('2222222', formData);
-
-  // window.location.assign('/private');
-  // const gallery = document.querySelector('.photo_gallery');
-  // gallery.innerHTML += `<img src="${formData.path}">`;
-
-  // const photos = document.querySelector('.photo_gallery');
-  // photos.innerHTML +=
+    const textReaderButton = document.querySelector('#start');
+    textReaderButton.addEventListener('click', async (e) => {
+      const lng = e.target.parentElement.querySelector('#langs').value;
+      let response = await fetch(`/private/${url}`, {
+        method:'POST',
+        headers: {
+          'Content-type':'Application/json'
+        },
+        body: JSON.stringify({
+          lng,
+        }),
+      });
+      let text = await response.json();
+      readText.innerHTML += `${text}`;
+    })
+  });
 });
+
+
