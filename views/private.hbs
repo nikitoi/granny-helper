@@ -1,19 +1,20 @@
-<h1>Привет, {{username}}!</h1>
+<h1 class="private">Привет, {{username}}!</h1>
 <form id="addImgForm" enctype="multipart/form-data" method="post" action="/private">
-  <p>Сначала выберите картинку, затем нажмите Добавить изображение</p>
-  <p><input id="file" class="file" type="file" name="photo" multiple accept="image/*,image/jpeg">
-  <input type="submit" value="Добавить изображение"></p>
+  <p class="private">Сначала выберите картинку, затем нажмите Добавить изображение</p>
+  <p class="private flex-column"><input id="file" class="file" type="file" name="photo" multiple accept="image/*,image/jpeg">
+  <input class="button" type="submit" value="Добавить изображение"></p>
 </form>
-<div class="read-photo">
+<div class="read-photo private">
 
 </div>
-<div class="read-text">
+<div class="read-text private">
 
 </div>
-<div class="photo_gallery">
+<p class="private nomargin">Кликните по фотографии, чтобы распознать текст</p>
+<div class="photo_gallery private">
   {{#each userPics}}
   <div class="pic_box">
-    <a href="private/{{this.id}}" class="pic__link"><img title="{{this.path}}" src="{{this.path}}" class="img" width="100%"></a>
+    <a href="private/{{this.id}}" class="pic__link"><img title="{{this.path}}" src="{{this.path}}" class="img" width="100%" height="180px"></a>
     <p>{{this.originalname}}</p>
   </div>
   {{/each}}
@@ -28,6 +29,9 @@
 
   .photo_gallery {
     display: flex;
+    width: 100%;
+    justify-content: center;
+    {{!-- background-image: url('images/2434841244a6b217d596e9.jpg'); --}}
   }
 
   .read-photo {
@@ -35,11 +39,44 @@
     flex-direction: column;
     width: 300px;
     align-items: center;
-    margin: 30px auto;
+    {{!-- margin: 30px auto; --}}
   }
 
   .read-text {
     width: 500px;
-    margin: 30px auto;
+    {{!-- margin: 30px auto; --}}
+  }
+
+  .button {
+    width: 200px;
+    height: 30px;
+    background-color: cadetblue;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    line-height: 30px;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .light {
+    background-color: rgb(123, 208, 211);
+  }
+
+  .nav-link {
+    color: rgb(64, 110, 112);
+  }
+
+  .nav {
+    background-image: url('images/2434841244a6b217d596e9.jpg');
+    background-size: cover;
+  }
+
+  .private {
+    color: rgb(64, 110, 112);
+  }
+
+  .nomargin {
+    margin-bottom: 0;
   }
 </style>

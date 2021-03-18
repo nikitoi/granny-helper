@@ -11,6 +11,8 @@ import authMiddleware from '../middlewares/auth.js';
 import Image from '../models/image.js';
 import User from '../models/user.js';
 
+import say from 'say';
+
 // import Tesseract from 'tesseract.js';
 
 import { createWorker } from 'tesseract.js';
@@ -27,19 +29,29 @@ const router = express.Router();
 
 router.get('/', authMiddleware, async (req, res) => {
   const user = await User.findOne({ _id: req.session.user.id });
-  let userPics = []
-  for (let i = 0; i < user.pics.length; i++) {
-    let currImg = await Image.findOne({ _id: user.pics[i]});
-    currImg.path = currImg.path.slice(6);
-    userPics.push(currImg);
+  if (req.session.user.status === 'Бабушка') {
+    let userPics = [];
+    for (let i = 0; i < user.pics.length; i++) {
+      let currImg = await Image.findOne({ _id: user.pics[i]});
+      currImg.path = currImg.path.slice(6);
+      userPics.push(currImg);
+    }
+    console.log(userPics);
+    res.render('private', { userPics });
+  } else {
+    const granny = await User.findOne({ _id: user.granny});
+    let userPics = [];
+    for (let i = 0; i < granny.pics.length; i++) {
+      let currImg = await Image.findOne({ _id: granny.pics[i]});
+      currImg.path = currImg.path.slice(6);
+      userPics.push(currImg);
+    }
+    res.render('grandchild', { userPics });
   }
-  // user.populate('pics');
-  console.log(userPics);
-  // const userPics = user.pics;
-  res.render('private', { userPics });
 });
 
 router.post('/', upload.single('photo'), async (req, res, next) => {
+  console.log('simple');
   const photo = req.file;
   // console.log(photo);
   const img = await new Image({
@@ -57,6 +69,7 @@ router.post('/', upload.single('photo'), async (req, res, next) => {
 });
 
 router.post('/:id', async (req, res, next) => {
+  console.log('iddd');
   const picId = req.params.id;
   const { lng } = req.body;
   const dirr = __dirname.slice(0, -6);
@@ -78,6 +91,19 @@ router.post('/:id', async (req, res, next) => {
   }
 
   res.json(await recognize());
+});
+
+// router.post('/:filename', async (req, res, next) => {
+//   const picFilename = req.params.filename;
+
+// })
+
+router.post('/say/loud', async (req, res, next) => {
+  console.log('loud');
+  const { textToRead } = req.body;
+  // console.log(textToRead);
+  await say.speak(textToRead);
+  // res.json();
 });
 
 

@@ -335,8 +335,10 @@ input[type=text], input[type=password], textarea {
 
 .btn-primary {
   width: 100%;
-  background-color: #32bb7d;
-  border: #32bb7d;
+  background-color: cadetblue;
+  color: white;
+  border-radius: 5px;
+  border: none;
   height: 40px;
 }
 
@@ -344,4 +346,9 @@ input[type=text], input[type=password], textarea {
   align-self: start;
   color: lightgray;
   margin-bottom: 20px;
+}
+
+.nav {
+  background-image: url('../images/2434841244a6b217d596e9.jpg');
+  background-size: cover;
 }

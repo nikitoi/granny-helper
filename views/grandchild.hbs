@@ -1,0 +1,47 @@
+<h1 class="private">Привет, {{username}}!</h1>
+<p class="private nomargin">Вот картинки, которые понравились твоей бабушке</p>
+
+<div class="photo_gallery private">
+  {{#each userPics}}
+  <div class="pic_box">
+    <img title="{{this.path}}" src="{{this.path}}" class="img" width="100%" height="180px">
+    <p>{{this.originalname}}</p>
+  </div>
+  {{/each}}
+</div>
+<div class="modal"></div>
+<script defer src="/js/grandchild.js"></script>
+<style>
+  .pic_box {
+    width: 200px;
+    margin: 10px;
+    height: 200px;
+  }
+
+  .photo_gallery {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    {{!-- background-image: url('images/2434841244a6b217d596e9.jpg'); --}}
+  }
+
+  .private {
+    color: rgb(64, 110, 112);
+  }
+
+  .nomargin {
+    margin-bottom: 0;
+  }
+
+  .modal img{
+    z-index: 100;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 500px;
+  }
+
+  .img {
+    cursor: pointer;
+  }
+</style>
