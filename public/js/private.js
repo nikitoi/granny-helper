@@ -1,6 +1,7 @@
 const picLinks = document.querySelectorAll('.pic__link');
 const readPhoto = document.querySelector('.read-photo');
 const readText = document.querySelector('.read-text');
+const btnDelete = document.querySelectorAll('.btn-delete');
 // const formData = new FormData(form);
 // const readLoudButton = document.querySelector('#text-reader');
 
@@ -47,15 +48,9 @@ picLinks.forEach((el) => {
           console.log('bam');
           // const { action, method } = e.target;
           let textToRead = eve.target.parentElement.querySelector('p').innerText;
-          let newresponse = await fetch('/private/say/loud', {
-            method: 'POST',
-            headers: {
-              'Content-type':'Application/json'
-            },
-            body: JSON.stringify({
-              textToRead,
-            }),
-          });
+          speechSynthesis.speak(
+            new SpeechSynthesisUtterance(textToRead)
+          );
         });
       };
 
@@ -66,19 +61,19 @@ picLinks.forEach((el) => {
   });
 });
 
-// const readLoudButton = document.querySelector('#text-reader');
-
-// readLoudButton?.addEventListener('click', async (eve) => {
-//   eve.preventDefault();
-//   console.log('bam');
-//   let textToRead = eve.target.parentElement.querySelector('p').innerText;
-//   await fetch('/private/sayloud', {
-//     method:'POST',
-//     headers: {
-//       'Content-type':'Application/json'
-//     },
-//     body: JSON.stringify({
-//       textToRead,
-//     }),
-//   });
-// });
+btnDelete.forEach(el => {
+  el.addEventListener('click', async (e) => {
+    let imgFilename = e.target.parentElement.querySelector('img').title.slice(9);
+    let response = await fetch('/private/delete/img', {
+      method:'DELETE',
+      headers: {
+        'Content-type':'Application/json'
+      },
+      body: JSON.stringify({
+        imgFilename,
+      }),
+    });
+    let result = await response.json();
+    e.target.parentElement.remove();
+  });
+});

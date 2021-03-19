@@ -351,3 +351,7 @@ input[type=text], input[type=password], textarea {
   background-image: url('../images/2434841244a6b217d596e9.jpg');
   background-size: cover;
 }
+
+.label-wide {
+  width: 100%;
+}

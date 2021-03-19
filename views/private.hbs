@@ -15,7 +15,8 @@
   {{#each userPics}}
   <div class="pic_box">
     <a href="private/{{this.id}}" class="pic__link"><img title="{{this.path}}" src="{{this.path}}" class="img" width="100%" height="180px"></a>
-    <p>{{this.originalname}}</p>
+    <p class="nomargin">{{this.originalname}}</p>
+    <button class="button btn-delete">удалить</button>
   </div>
   {{/each}}
 </div>

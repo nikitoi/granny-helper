@@ -36,7 +36,6 @@ router.get('/', authMiddleware, async (req, res) => {
       currImg.path = currImg.path.slice(6);
       userPics.push(currImg);
     }
-    console.log(userPics);
     res.render('private', { userPics });
   } else {
     const granny = await User.findOne({ _id: user.granny});
@@ -98,12 +97,16 @@ router.post('/:id', async (req, res, next) => {
 
 // })
 
-router.post('/say/loud', async (req, res, next) => {
-  console.log('loud');
-  const { textToRead } = req.body;
-  // console.log(textToRead);
-  await say.speak(textToRead);
-  // res.json();
+router.delete('/delete/img', async (req, res, next) => {
+  const { imgFilename } = req.body;
+  const picToDelete = await Image.findOne({filename: imgFilename});
+  const user = await User.findOne({ _id: req.session.user.id });
+  const ind = user.pics.indexOf(picToDelete._id);
+  user.pics.splice(ind, 1);
+  await user.save();
+  // console.log(picToDelete);
+  await Image.deleteOne(picToDelete);
+  res.json('ok');
 });
 
 

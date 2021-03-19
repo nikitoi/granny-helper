@@ -1,13 +1,13 @@
 <h1>Регистрация</h1>
 <form id="signupForm" method="POST" action="/signup">
   <div class="form-group">
-    <label for="username">Логин:
+    <label class="label-wide" for="username">Логин:
       <input id="username" class="form-control" name="username" type="text" required pattern="[A-Za-z]\w+" minlength="2"
         title="Латинские буквы, цифры и _">
     </label>
   </div>
   <div class="form-group">
-    <label for="status">Статус:
+    <label class="label-wide" for="status">Статус:
       <select id="status" class="form-control" name="status" required>
         <option>Бабушка</option>
         <option>Внук</option>
@@ -15,12 +15,12 @@
     </label>
   </div>
   <div class="form-group">
-    <label for="granny">Если вы внук, укажите логин вашей Бабушки:
+    <label class="label-wide" for="granny">Если вы внук, укажите логин вашей Бабушки:
       <input id="granny" class="form-control" name="granny" type="text" minlength="2">
     </label>
   </div>
   <div class="form-group">
-    <label for="password">Пароль:
+    <label class="label-wide" for="password">Пароль:
       <input id="password" class="form-control" name="password" type="password" required minlength="4">
     </label>
   </div>
