@@ -20,29 +20,32 @@
 </head>
 
 <body>
-  <ul class="nav">
-    {{#if username}}
-    <li class="nav-item">
-      <a class="nav-link" href="/private/details">Инструкция</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/private">Личный кабинет</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/signout">Выйти</a>
-    </li>
-    {{else}}
-    <li class="nav-item">
-      <a class="nav-link" href="/">Главная</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/signin">Войти</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/signup">Регистрация</a>
-    </li>
-    {{/if}}
-  </ul>
+  <header class="header">
+    <ul class="nav">
+      {{#if username}}
+      <li class="nav-item">
+        <a class="nav-link" href="/private/details">Инструкция</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/private">Личный кабинет</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/signout">Выйти</a>
+      </li>
+      {{else}}
+      <li class="nav-item">
+        <a class="nav-link" href="/">Главная</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/signin">Войти</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/signup">Регистрация</a>
+      </li>
+      {{/if}}
+    </ul>
+    <button id="help_button" class="button red-btn">Позвать на помощь</button>
+  </header>
   <div class="container-fluid">
     {{{body}}}
   </div>
@@ -57,9 +60,31 @@
     background-color: rgb(194, 216, 211);
   }
 
-  .nav {
+  .header {
     background-image: url('../images/2434841244a6b217d596e9.jpg');
     background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
+
+  .button {
+    width: 200px;
+    height: 30px;
+    background-color: cadetblue;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    line-height: 30px;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .red-btn {
+    margin: 0;
+    background-color: red;
+    margin-right: 20px;
   }
 
   .container-fluid {
@@ -74,6 +99,10 @@
   .photo-gallery {
     width: 100%;
 
+  }
+
+  .popup_opened {
+    background-color: rgba(0, 0, 0, 0.8);
   }
 
   .flex-column {

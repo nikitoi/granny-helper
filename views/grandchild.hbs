@@ -1,7 +1,7 @@
 <h1 class="private">Привет, {{username}}!</h1>
-<p class="private nomargin">Вот картинки, которые понравились твоей бабушке</p>
-
-<div class="photo_gallery private">
+<p class="private nomargin">Картинки, которые понравились твоей бабушке:</p>
+<div class="private popup" width="70vw"></div>
+<div class="photo_gallery private pic_box">
   {{#each userPics}}
   <div class="pic_box">
     <img title="{{this.path}}" src="{{this.path}}" class="img" width="100%" height="180px">
@@ -9,7 +9,6 @@
   </div>
   {{/each}}
 </div>
-<div class="modal"></div>
 <script defer src="/js/grandchild.js"></script>
 <style>
   .pic_box {
@@ -33,12 +32,30 @@
     margin-bottom: 0;
   }
 
-  .modal img{
-    z-index: 100;
+  .popup {
     position: absolute;
-    top: 100px;
-    left: 100px;
-    width: 500px;
+    top: 10%;
+    left: calc(width - 100px);
+  }
+
+  .popup__close-btn {
+    position: absolute;
+    top: -46px;
+    right: -46px;
+    background-image: url('images/close.svg');
+    background-size: contain;
+    height: 57.56px;
+    width: 57.56px;
+    padding: 0;
+    color: #000000;
+    background-color: transparent;
+    border: none;
+  }
+
+  .popup_opened {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
   }
 
   .img {

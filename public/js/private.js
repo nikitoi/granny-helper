@@ -32,23 +32,23 @@ picLinks.forEach((el) => {
         }),
       });
       let text = await response.json();
-      readText.innerHTML = `<form id="#text-form" method="post" action="/private/say/loud">
+      readText.innerHTML = `<form id="#text-form" class="sayLoudForm" method="post" action="/private/say/loud">
                             <p>${text}</p>
                             <button class="button" id="text-reader">Прочитать вслух</button>
                             </form>`;
       console.log('mew');
 
       const sayLoud = async () => {
-        const readLoudForm = document.querySelector('#text-form');
+        const readLoudForm = document.querySelector('.sayLoudForm');
         console.log(readLoudForm);
 
         readLoudForm.addEventListener('submit', async (eve) => {
           eve.preventDefault();
           console.log('bam');
-          const { action, method } = e.target;
+          // const { action, method } = e.target;
           let textToRead = eve.target.parentElement.querySelector('p').innerText;
-          await fetch(action, {
-            method,
+          let newresponse = await fetch('/private/say/loud', {
+            method: 'POST',
             headers: {
               'Content-type':'Application/json'
             },
